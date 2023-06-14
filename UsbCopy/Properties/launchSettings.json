@@ -1,0 +1,8 @@
+{
+    "profiles": {
+        "UsbCopy": {
+            "commandName": "Project",
+            "commandLineArgs": "--use \"D:\\1WorkSecurity\\UsbCopy\\UsbCopy.json\""
+        }
+    }
+}

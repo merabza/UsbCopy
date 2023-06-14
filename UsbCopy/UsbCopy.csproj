@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppCliTools\CliParametersEdit\CliParametersEdit.csproj" />
+    <ProjectReference Include="..\..\AppCliTools\CliParametersExcludeSetsEdit\CliParametersExcludeSetsEdit.csproj" />
+    <ProjectReference Include="..\..\AppCliTools\CliParameters\CliParameters.csproj" />
+    <ProjectReference Include="..\..\AppCliTools\CliTools\CliTools.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
