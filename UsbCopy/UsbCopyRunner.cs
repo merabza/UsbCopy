@@ -16,12 +16,14 @@ public sealed class UsbCopyRunner : ToolCommand
     private const string ActionDescription = "This will Copy Files to specified storage";
 
     private readonly ILogger _logger;
+    private readonly bool _useConsole;
 
     public UsbCopyRunner(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
-        IParametersManager? parametersManager) : base(logger, useConsole, ActionName,
+        IParametersManager? parametersManager) : base(logger, ActionName,
         usbCopyRunnerParameters, parametersManager, ActionDescription)
     {
         _logger = logger;
+        _useConsole = useConsole;
     }
 
     private UsbCopyRunnerParameters UsbCopyRunnerParameters => (UsbCopyRunnerParameters)Par;
@@ -36,7 +38,7 @@ public sealed class UsbCopyRunner : ToolCommand
         }
         catch (Exception e)
         {
-            StShared.WriteException(e, UseConsole);
+            StShared.WriteException(e, _useConsole);
             throw;
         }
     }
@@ -68,10 +70,10 @@ public sealed class UsbCopyRunner : ToolCommand
         var path = localAfterRootPath == null
             ? UsbCopyRunnerParameters.MainFolder
             : Path.Combine(UsbCopyRunnerParameters.MainFolder, localAfterRootPath);
-        var localPatchChecked = FileStat.CreateFolderIfNotExists(path, UseConsole, _logger);
+        var localPatchChecked = FileStat.CreateFolderIfNotExists(path, _useConsole, _logger);
         if (localPatchChecked == null)
         {
-            StShared.WriteErrorLine($"Cannot Create Folder {path}", UseConsole, _logger);
+            StShared.WriteErrorLine($"Cannot Create Folder {path}", _useConsole, _logger);
             return;
         }
 
