@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using CliMenu;
 using LibParameters;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ public sealed class ToolTaskCommand : CliMenuCommand
     private readonly string _projectName;
     private readonly ETools _tool;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public ToolTaskCommand(ILogger logger, ETools tool, string projectName,
         IParametersManager parametersManager)
     {
@@ -40,7 +42,7 @@ public sealed class ToolTaskCommand : CliMenuCommand
         Console.WriteLine("Tools is running...");
         Console.WriteLine("---");
 
-        toolCommand.Run();
+        toolCommand.Run(CancellationToken.None).Wait();
 
         Console.WriteLine("---");
 

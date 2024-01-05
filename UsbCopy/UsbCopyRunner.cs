@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using CliParameters;
 using LibParameters;
 using Microsoft.Extensions.Logging;
@@ -18,6 +20,7 @@ public sealed class UsbCopyRunner : ToolCommand
     private readonly ILogger _logger;
     private readonly bool _useConsole;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public UsbCopyRunner(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
         IParametersManager? parametersManager) : base(logger, ActionName,
         usbCopyRunnerParameters, parametersManager, ActionDescription)
@@ -28,13 +31,14 @@ public sealed class UsbCopyRunner : ToolCommand
 
     private UsbCopyRunnerParameters UsbCopyRunnerParameters => (UsbCopyRunnerParameters)Par;
 
-    protected override bool RunAction()
+    protected override Task<bool> RunAction(CancellationToken cancellationToken)
+
     {
         try
         {
             ProcessFolder();
 
-            return true;
+            return Task.FromResult(true);
         }
         catch (Exception e)
         {
