@@ -39,7 +39,8 @@ try
 
     var parametersFileName = argParser.ParametersFileName;
     ServicesCreator servicesCreator = new(par.LogFolder, null, "UsbCopy");
-    var serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
+    // ReSharper disable once using
+    using var serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
 
     if (serviceProvider == null)
     {
