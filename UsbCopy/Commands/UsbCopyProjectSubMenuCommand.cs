@@ -1,6 +1,6 @@
 ﻿using System;
 using CliMenu;
-using CliParameters.MenuCommands;
+using CliParameters.CliMenuCommands;
 using LibDataInput;
 using LibParameters;
 using Microsoft.Extensions.Logging;
@@ -15,6 +15,7 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 
     private readonly string _projectName;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public UsbCopyProjectSubMenuCommand(ILogger logger, ParametersManager parametersManager, string projectName) : base(
         projectName)
     {
@@ -41,13 +42,10 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 
         //პროექტის პარამეტრი
         UsbCopyProjectCruder projectCruder = new(_logger, _parametersManager);
-        EditItemAllFieldsInSequenceCommand editCommand = new(projectCruder, _projectName);
+        EditItemAllFieldsInSequenceCliMenuCommand editCommand = new(projectCruder, _projectName);
         projectSubMenuSet.AddMenuItem(editCommand, "Edit All fields in sequence");
 
         projectCruder.FillDetailsSubMenu(projectSubMenuSet, _projectName);
-
-        //projectSubMenuSet.AddMenuItem(new GitSubMenuCommand(_logger, _parametersManager, _projectName, EGitCol.Main),
-        //    "Git");
 
         var project = parameters.GetProject(_projectName);
 
@@ -56,24 +54,10 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
                 projectSubMenuSet.AddMenuItem(new ToolTaskCommand(_logger, tool, _projectName, _parametersManager),
                     tool.ToString());
 
-        //ServerInfoCruder serverInfoCruder = new(_logger, _parametersManager, _projectName);
-
-        ////ახალი სერვერის ინფორმაციის შექმნა
-        //NewItemCommand newItemCommand =
-        //    new(serverInfoCruder, serverInfoCruder.CrudNamePlural, $"New {serverInfoCruder.CrudName}");
-        //projectSubMenuSet.AddMenuItem(newItemCommand);
-
-        ////სერვერების ჩამონათვალი
-        //if (project?.ServerInfos != null)
-        //{
-        //    foreach (KeyValuePair<string, ServerInfoModel> kvp in project.ServerInfos.OrderBy(o => o.Key))
-        //        projectSubMenuSet.AddMenuItem(
-        //            new ServerInfoSubMenuCommand(_logger, _parametersManager, _projectName, kvp.Key), kvp.Key);
-        //}
-
         //მთავარ მენიუში გასვლა
         var key = ConsoleKey.Escape.Value().ToLower();
-        projectSubMenuSet.AddMenuItem(key, "Exit to Main menu", new ExitToMainMenuCommand(null, null), key.Length);
+        projectSubMenuSet.AddMenuItem(key, "Exit to Main menu", new ExitToMainMenuCliMenuCommand(null, null),
+            key.Length);
 
         return projectSubMenuSet;
     }
