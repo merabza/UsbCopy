@@ -26,7 +26,7 @@ public sealed class UsbCopy : CliAppLoop
         _parametersManager = parametersManager;
     }
 
-    protected override bool BuildMainMenu()
+    protected override void BuildMainMenu()
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
@@ -59,7 +59,5 @@ public sealed class UsbCopy : CliAppLoop
         //გასასვლელი
         var key = ConsoleKey.Escape.Value().ToLower();
         mainMenuSet.AddMenuItem(key, "Exit", new ExitCliMenuCommand(), key.Length);
-
-        return true;
     }
 }
