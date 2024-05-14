@@ -48,8 +48,6 @@ public sealed class ToolTaskCommand : CliMenuCommand
 
         Console.WriteLine($"Tool Finished. {StShared.TimeTakenMessage(startDateTime)}");
 
-
-        StShared.Pause();
         MenuAction = EMenuAction.Reload;
     }
 }
