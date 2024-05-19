@@ -15,8 +15,8 @@ public sealed class ToolTaskCommand : CliMenuCommand
     private readonly ETools _tool;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public ToolTaskCommand(ILogger logger, ETools tool, string projectName,
-        IParametersManager parametersManager)
+    public ToolTaskCommand(ILogger logger, ETools tool, string projectName, IParametersManager parametersManager) :
+        base(null, EMenuAction.Reload)
     {
         _logger = logger;
         _tool = tool;
@@ -24,8 +24,7 @@ public sealed class ToolTaskCommand : CliMenuCommand
         _parametersManager = parametersManager;
     }
 
-
-    protected override void RunAction()
+    protected override bool RunBody()
     {
         var toolCommand = ToolCommandFabric.Create(_logger, _tool, _projectName, _parametersManager);
 
@@ -33,21 +32,9 @@ public sealed class ToolTaskCommand : CliMenuCommand
         {
             Console.WriteLine("Parameters not loaded. Tool not started.");
             StShared.Pause();
-            return;
+            return false;
         }
 
-        //დავინიშნოთ დრო
-        var startDateTime = DateTime.Now;
-
-        Console.WriteLine("Tools is running...");
-        Console.WriteLine("---");
-
-        toolCommand.Run(CancellationToken.None).Wait();
-
-        Console.WriteLine("---");
-
-        Console.WriteLine($"Tool Finished. {StShared.TimeTakenMessage(startDateTime)}");
-
-        MenuAction = EMenuAction.Reload;
+        return toolCommand.Run(CancellationToken.None).Result;
     }
 }
