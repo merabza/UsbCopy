@@ -47,8 +47,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibFileParameters", "..\Par
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileManagersMain", "..\ToolsManagement\FileManagersMain\FileManagersMain.csproj", "{93B0EF44-CA89-4451-B98A-98B18C19F4F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRContracts", "..\SystemTools\SignalRContracts\SignalRContracts.csproj", "{D589C96E-167E-4026-BD0C-A3CA05A897CA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -263,18 +261,6 @@ Global
 		{93B0EF44-CA89-4451-B98A-98B18C19F4F8}.Release|x64.Build.0 = Release|Any CPU
 		{93B0EF44-CA89-4451-B98A-98B18C19F4F8}.Release|x86.ActiveCfg = Release|Any CPU
 		{93B0EF44-CA89-4451-B98A-98B18C19F4F8}.Release|x86.Build.0 = Release|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Debug|x64.Build.0 = Debug|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Debug|x86.Build.0 = Debug|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Release|x64.ActiveCfg = Release|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Release|x64.Build.0 = Release|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Release|x86.ActiveCfg = Release|Any CPU
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -296,7 +282,6 @@ Global
 		{12E8DADE-15C2-4C2B-B73B-5543C70C2929} = {04952D55-601D-49D0-9E75-EDFD987F73EA}
 		{38EA886D-E375-482E-939F-5661241085BD} = {EFDA4858-5430-48B3-AD7A-BA9D5F4303B2}
 		{93B0EF44-CA89-4451-B98A-98B18C19F4F8} = {04952D55-601D-49D0-9E75-EDFD987F73EA}
-		{D589C96E-167E-4026-BD0C-A3CA05A897CA} = {1CDDB0C5-AFD1-49FF-B818-4BACFFBBE064}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B8BE9C2-43DF-4120-A16D-DC73E14496A8}
