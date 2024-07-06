@@ -92,10 +92,10 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var folderNames = localFileManager.GetFolderNames("", null);
+        var folderNames = localFileManager.GetFolderNames(string.Empty, null);
 
         const string folderMask = "yyyyMMddHHmmss";
-        List<BuFileInfo> buFileInfos = new();
+        List<BuFileInfo> buFileInfos = [];
 
         foreach (var folderName in folderNames)
         {
