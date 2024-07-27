@@ -26,18 +26,11 @@ public sealed class UsbCopy : CliAppLoop
         _parametersManager = parametersManager;
     }
 
-    protected override void BuildMainMenu()
+    public override CliMenuSet BuildMainMenu()
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
-        //if (parameters == null)
-        //{
-        //    StShared.WriteErrorLine("minimal parameters not found", true);
-        //    return false;
-        //}
-
         CliMenuSet mainMenuSet = new("Main Menu");
-        AddChangeMenu(mainMenuSet);
 
         UsbCopyParametersEditor usbCopyParametersEditor = new(parameters, _parametersManager, _logger);
         mainMenuSet.AddMenuItem(new ParametersEditorListCliMenuCommand(usbCopyParametersEditor),
@@ -59,5 +52,7 @@ public sealed class UsbCopy : CliAppLoop
         //გასასვლელი
         var key = ConsoleKey.Escape.Value().ToLower();
         mainMenuSet.AddMenuItem(key, "Exit", new ExitCliMenuCommand(), key.Length);
+
+        return mainMenuSet;
     }
 }
