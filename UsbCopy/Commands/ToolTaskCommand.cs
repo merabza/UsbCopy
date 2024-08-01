@@ -16,7 +16,7 @@ public sealed class ToolTaskCommand : CliMenuCommand
 
     // ReSharper disable once ConvertToPrimaryConstructor
     public ToolTaskCommand(ILogger logger, ETools tool, string projectName, IParametersManager parametersManager) :
-        base(null, EMenuAction.Reload)
+        base(tool.ToString(), EMenuAction.Reload)
     {
         _logger = logger;
         _tool = tool;
@@ -28,13 +28,12 @@ public sealed class ToolTaskCommand : CliMenuCommand
     {
         var toolCommand = ToolCommandFabric.Create(_logger, _tool, _projectName, _parametersManager);
 
-        if (toolCommand?.Par == null)
-        {
-            Console.WriteLine("Parameters not loaded. Tool not started.");
-            StShared.Pause();
-            return false;
-        }
+        if (toolCommand?.Par != null) 
+            return toolCommand.Run(CancellationToken.None).Result;
 
-        return toolCommand.Run(CancellationToken.None).Result;
+        Console.WriteLine("Parameters not loaded. Tool not started.");
+        StShared.Pause();
+        return false;
+
     }
 }

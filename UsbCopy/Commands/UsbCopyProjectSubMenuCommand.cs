@@ -37,7 +37,7 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
         //პროექტის პარამეტრი
         UsbCopyProjectCruder projectCruder = new(_logger, _parametersManager);
         EditItemAllFieldsInSequenceCliMenuCommand editCommand = new(projectCruder, _projectName);
-        projectSubMenuSet.AddMenuItem(editCommand, "Edit All fields in sequence");
+        projectSubMenuSet.AddMenuItem(editCommand);
 
         projectCruder.FillDetailsSubMenu(projectSubMenuSet, _projectName);
 
@@ -45,13 +45,11 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 
         if (project != null)
             foreach (var tool in ToolCommandFabric.ToolsByProjects)
-                projectSubMenuSet.AddMenuItem(new ToolTaskCommand(_logger, tool, _projectName, _parametersManager),
-                    tool.ToString());
+                projectSubMenuSet.AddMenuItem(new ToolTaskCommand(_logger, tool, _projectName, _parametersManager));
 
         //მთავარ მენიუში გასვლა
         var key = ConsoleKey.Escape.Value().ToLower();
-        projectSubMenuSet.AddMenuItem(key, "Exit to Main menu", new ExitToMainMenuCliMenuCommand(null, null),
-            key.Length);
+        projectSubMenuSet.AddMenuItem(key, new ExitToMainMenuCliMenuCommand("Exit to Main menu", null), key.Length);
 
         return projectSubMenuSet;
     }

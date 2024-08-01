@@ -33,8 +33,7 @@ public sealed class UsbCopy : CliAppLoop
         CliMenuSet mainMenuSet = new("Main Menu");
 
         UsbCopyParametersEditor usbCopyParametersEditor = new(parameters, _parametersManager, _logger);
-        mainMenuSet.AddMenuItem(new ParametersEditorListCliMenuCommand(usbCopyParametersEditor),
-            "UsbCopy Parameters Editor");
+        mainMenuSet.AddMenuItem(new ParametersEditorListCliMenuCommand(usbCopyParametersEditor));
 
         //საჭირო მენიუს ელემენტები
 
@@ -47,11 +46,11 @@ public sealed class UsbCopy : CliAppLoop
 
         //პროექტების ჩამონათვალი
         foreach (var kvp in parameters.Projects.OrderBy(o => o.Key))
-            mainMenuSet.AddMenuItem(new UsbCopyProjectSubMenuCommand(_logger, _parametersManager, kvp.Key), kvp.Key);
+            mainMenuSet.AddMenuItem(new UsbCopyProjectSubMenuCommand(_logger, _parametersManager, kvp.Key));
 
         //გასასვლელი
         var key = ConsoleKey.Escape.Value().ToLower();
-        mainMenuSet.AddMenuItem(key, "Exit", new ExitCliMenuCommand(), key.Length);
+        mainMenuSet.AddMenuItem(key, new ExitCliMenuCommand(), key.Length);
 
         return mainMenuSet;
     }
