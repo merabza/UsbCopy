@@ -28,12 +28,11 @@ public sealed class ToolTaskCommand : CliMenuCommand
     {
         var toolCommand = ToolCommandFabric.Create(_logger, _tool, _projectName, _parametersManager);
 
-        if (toolCommand?.Par != null) 
+        if (toolCommand?.Par != null)
             return toolCommand.Run(CancellationToken.None).Result;
 
         Console.WriteLine("Parameters not loaded. Tool not started.");
         StShared.Pause();
         return false;
-
     }
 }
