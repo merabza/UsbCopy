@@ -24,7 +24,7 @@ try
 
     var key = appKey + Environment.MachineName.Capitalize();
 
-    IArgumentsParser argParser = new ArgumentsParser<UsbCopyParameters>(args, "UsbCopy", key);
+    var argParser = new ArgumentsParser<UsbCopyParameters>(args, "UsbCopy", key);
     switch (argParser.Analysis())
     {
         case EParseResult.Ok: break;
