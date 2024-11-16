@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using SystemToolsShared;
-using UsbCopy;
 using UsbCopy.Models;
 
 ILogger<Program>? logger = null;
@@ -16,10 +15,14 @@ try
 {
     Console.WriteLine("Loading...");
 
-    //პროგრამის ატრიბუტების დაყენება 
-    StatProgAttr.SetAttr();
+    const string appName = "UsbCopy";
+    const string appKey = "DFD53CBF-F62F-4795-80DA-F4AD7ECC4AD3";
 
-    var key = ProgramAttributes.Instance.GetAttribute<string>("AppKey") + Environment.MachineName.Capitalize();
+    //პროგრამის ატრიბუტების დაყენება 
+    ProgramAttributes.Instance.AppName = appName;
+    ProgramAttributes.Instance.AppKey = appKey;
+
+    var key = appKey + Environment.MachineName.Capitalize();
 
     IArgumentsParser argParser = new ArgumentsParser<UsbCopyParameters>(args, "UsbCopy", key);
     switch (argParser.Analysis())
@@ -56,9 +59,6 @@ try
     }
 
     UsbCopy.UsbCopy usbCopy = new(logger, new ParametersManager(parametersFileName, par));
-
-    //პროგრამის ატრიბუტების დაყენება 
-    StatProgramAttr.SetAttr();
 
     return usbCopy.Run() ? 0 : 1;
 }

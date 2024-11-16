@@ -8,9 +8,9 @@ namespace UsbCopy;
 public static class ToolCommandFabric
 {
     public static readonly ETools[] ToolsByProjects =
-    {
+    [
         ETools.CopyFiles
-    };
+    ];
 
     public static IToolCommand? Create(ILogger logger, ETools tool, string projectName,
         IParametersManager parametersManager)
