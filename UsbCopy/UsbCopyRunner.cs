@@ -31,14 +31,12 @@ public sealed class UsbCopyRunner : ToolCommand
 
     private UsbCopyRunnerParameters UsbCopyRunnerParameters => (UsbCopyRunnerParameters)Par;
 
-    protected override Task<bool> RunAction(CancellationToken cancellationToken)
-
+    protected override ValueTask<bool> RunAction(CancellationToken cancellationToken = default)
     {
         try
         {
             ProcessFolder();
-
-            return Task.FromResult(true);
+            return ValueTask.FromResult(true);
         }
         catch (Exception e)
         {
