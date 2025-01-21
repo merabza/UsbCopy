@@ -12,9 +12,8 @@ namespace UsbCopy;
 
 public sealed class UsbCopyParametersEditor : ParametersEditor
 {
-    public UsbCopyParametersEditor(IParameters parameters, ParametersManager parametersManager,
-        ILogger logger) :
-        base("UsbCopy Parameters Editor", parameters, parametersManager)
+    public UsbCopyParametersEditor(IParameters parameters, ParametersManager parametersManager, ILogger logger) : base(
+        "UsbCopy Parameters Editor", parameters, parametersManager)
     {
         FieldEditors.Add(new FolderPathFieldEditor(nameof(UsbCopyParameters.LogFolder)));
         FieldEditors.Add(new FileStoragesFieldEditor(logger, nameof(UsbCopyParameters.FileStorages),

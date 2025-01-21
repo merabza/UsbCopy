@@ -20,8 +20,7 @@ public static class ToolCommandFabric
             case ETools.CopyFiles:
                 var usbCopyParameters = (UsbCopyParameters)parametersManager.Parameters;
 
-                var usbCopyRunnerParameters =
-                    UsbCopyRunnerParameters.Create(logger, usbCopyParameters, projectName);
+                var usbCopyRunnerParameters = UsbCopyRunnerParameters.Create(logger, usbCopyParameters, projectName);
                 if (usbCopyRunnerParameters is not null)
                     return new UsbCopyRunner(logger, true, usbCopyRunnerParameters, parametersManager);
                 StShared.WriteErrorLine("UsbCopyRunnerParameters does not created", true);

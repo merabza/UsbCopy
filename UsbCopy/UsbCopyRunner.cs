@@ -22,8 +22,8 @@ public sealed class UsbCopyRunner : ToolCommand
 
     // ReSharper disable once ConvertToPrimaryConstructor
     public UsbCopyRunner(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
-        IParametersManager? parametersManager) : base(logger, ActionName,
-        usbCopyRunnerParameters, parametersManager, ActionDescription)
+        IParametersManager? parametersManager) : base(logger, ActionName, usbCopyRunnerParameters, parametersManager,
+        ActionDescription)
     {
         _logger = logger;
         _useConsole = useConsole;
@@ -108,8 +108,7 @@ public sealed class UsbCopyRunner : ToolCommand
         FolderFilesModel folderFiles = new();
         foreach (var fileName in fileNames)
         {
-            var (dateTimeByDigits, pattern) =
-                fileName.GetDateTimeAndPatternByDigits("yyyyMMddHHmmssfffffff");
+            var (dateTimeByDigits, pattern) = fileName.GetDateTimeAndPatternByDigits("yyyyMMddHHmmssfffffff");
 
             if (pattern != null)
             {

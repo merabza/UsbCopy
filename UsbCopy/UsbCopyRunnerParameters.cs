@@ -14,10 +14,8 @@ namespace UsbCopy;
 
 public sealed class UsbCopyRunnerParameters : IParameters
 {
-    private UsbCopyRunnerParameters(
-        FileManager mainFolderFileManager,
-        FileManager fileManager,
-        string mainFolder, string[] excludes)
+    private UsbCopyRunnerParameters(FileManager mainFolderFileManager, FileManager fileManager, string mainFolder,
+        string[] excludes)
     {
         FileManager = fileManager;
         MainFolderFileManager = mainFolderFileManager;
@@ -58,8 +56,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var localPathChecked =
-            FileStat.CreateFolderIfNotExists(project.LocalPath, true, logger);
+        var localPathChecked = FileStat.CreateFolderIfNotExists(project.LocalPath, true, logger);
         if (localPathChecked == null)
         {
             StShared.WriteErrorLine($"local path {project.LocalPath} can not be created", true, logger);
@@ -83,8 +80,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var localFileManager =
-            FileManagersFabric.CreateFileManager(true, logger, project.LocalPath);
+        var localFileManager = FileManagersFabric.CreateFileManager(true, logger, project.LocalPath);
 
         if (localFileManager == null)
         {
@@ -111,8 +107,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             if (!Inputer.InputBool($"Continue with existing folder {lastFolderName.FileName}", false, false))
                 lastFolderName = null;
 
-        var mainFolderName =
-            lastFolderName == null ? DateTime.Now.ToString(folderMask) : lastFolderName.FileName;
+        var mainFolderName = lastFolderName == null ? DateTime.Now.ToString(folderMask) : lastFolderName.FileName;
         var mainFolderFullPath = Path.Combine(project.LocalPath, mainFolderName);
 
         var mainFolder = FileStat.CreateFolderIfNotExists(mainFolderFullPath, true, logger);
@@ -146,13 +141,11 @@ public sealed class UsbCopyRunnerParameters : IParameters
 
             if (excludeSet.FolderFileMasks is { Count: > 0 })
                 excludes = excludeSet.FolderFileMasks
-                    .Select(s => s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar))
-                    .ToArray();
+                    .Select(s => s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar)).ToArray();
         }
 
 
-        var mainFolderFileManager =
-            FileManagersFabric.CreateFileManager(true, logger, mainFolder);
+        var mainFolderFileManager = FileManagersFabric.CreateFileManager(true, logger, mainFolder);
 
         if (mainFolderFileManager == null)
         {
@@ -163,9 +156,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
 
         UsbCopyRunnerParameters usbCopyRunnerParameters = new(
             //project.LocalPath, fileStorage, 
-            mainFolderFileManager,
-            fileManager,
-            mainFolder, excludes);
+            mainFolderFileManager, fileManager, mainFolder, excludes);
         return usbCopyRunnerParameters;
     }
 }

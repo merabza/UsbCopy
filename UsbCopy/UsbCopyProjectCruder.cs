@@ -14,14 +14,12 @@ namespace UsbCopy;
 public sealed class UsbCopyProjectCruder : ParCruder
 {
     public UsbCopyProjectCruder(ILogger logger, ParametersManager parametersManager) : base(parametersManager,
-        "Project",
-        "Projects")
+        "Project", "Projects")
     {
         FieldEditors.Add(new FolderPathFieldEditor(nameof(UsbCopyProjectModel.LocalPath)));
         FieldEditors.Add(new FileStorageNameFieldEditor(logger, nameof(UsbCopyProjectModel.FileStorageName),
             parametersManager));
-        FieldEditors.Add(new ExcludeSetNameFieldEditor(nameof(UsbCopyProjectModel.ExcludeSetName),
-            parametersManager));
+        FieldEditors.Add(new ExcludeSetNameFieldEditor(nameof(UsbCopyProjectModel.ExcludeSetName), parametersManager));
     }
 
     protected override Dictionary<string, ItemData> GetCrudersDictionary()
