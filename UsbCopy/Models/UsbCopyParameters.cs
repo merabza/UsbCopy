@@ -17,12 +17,10 @@ public sealed class UsbCopyParameters : IParametersWithFileStorages, IParameters
 
     public Dictionary<string, FileStorageData> FileStorages { get; init; } = new();
 
-
     public bool CheckBeforeSave()
     {
         return true;
     }
-
 
     public UsbCopyProjectModel? GetProject(string projectName)
     {

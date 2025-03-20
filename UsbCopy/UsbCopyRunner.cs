@@ -102,7 +102,6 @@ public sealed class UsbCopyRunner : ToolCommand
         }
     }
 
-
     private static FolderFilesModel GetFolderFiles(List<string> fileNames)
     {
         FolderFilesModel folderFiles = new();

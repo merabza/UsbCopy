@@ -38,7 +38,6 @@ public sealed class UsbCopyRunnerParameters : IParameters
     {
         var project = usbCopyParameters.GetProjectRequired(projectName);
 
-
         //var drives = DriveInfo.GetDrives()
         //    .Where(drive => drive.IsReady && drive.DriveType == DriveType.Removable).ToList();
 
@@ -125,7 +124,6 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-
         var excludes = Array.Empty<string>();
         //Check ExcludeSet
         if (!string.IsNullOrWhiteSpace(project.ExcludeSetName))
@@ -144,7 +142,6 @@ public sealed class UsbCopyRunnerParameters : IParameters
                     .Select(s => s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar)).ToArray();
         }
 
-
         var mainFolderFileManager = FileManagersFabric.CreateFileManager(true, logger, mainFolder);
 
         if (mainFolderFileManager == null)
@@ -152,7 +149,6 @@ public sealed class UsbCopyRunnerParameters : IParameters
             StShared.WriteErrorLine("mainFolderFileManager does not created", true, logger);
             return null;
         }
-
 
         UsbCopyRunnerParameters usbCopyRunnerParameters = new(
             //project.LocalPath, fileStorage, 
