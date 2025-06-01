@@ -24,7 +24,7 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
         _projectName = projectName;
     }
 
-    public override CliMenuSet GetSubmenu()
+    public override CliMenuSet GetSubMenu()
     {
         CliMenuSet projectSubMenuSet = new($"Project => {_projectName}");
 
