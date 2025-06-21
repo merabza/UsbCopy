@@ -26,7 +26,7 @@ public sealed class ToolTaskCommand : CliMenuCommand
 
     protected override bool RunBody()
     {
-        var toolCommand = ToolCommandFabric.Create(_logger, _tool, _projectName, _parametersManager);
+        var toolCommand = ToolCommandFactory.Create(_logger, _tool, _projectName, _parametersManager);
 
         if (toolCommand?.Par != null)
             return toolCommand.Run(CancellationToken.None).Result;

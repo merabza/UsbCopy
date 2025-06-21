@@ -44,7 +44,7 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
         var project = parameters.GetProject(_projectName);
 
         if (project != null)
-            foreach (var tool in ToolCommandFabric.ToolsByProjects)
+            foreach (var tool in ToolCommandFactory.ToolsByProjects)
                 projectSubMenuSet.AddMenuItem(new ToolTaskCommand(_logger, tool, _projectName, _parametersManager));
 
         //მთავარ მენიუში გასვლა

@@ -79,7 +79,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var localFileManager = FileManagersFabric.CreateFileManager(true, logger, project.LocalPath);
+        var localFileManager = FileManagersFactory.CreateFileManager(true, logger, project.LocalPath);
 
         if (localFileManager == null)
         {
@@ -116,7 +116,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var fileManager = FileManagersFabricExt.CreateFileManager(true, logger, mainFolder, fileStorage);
+        var fileManager = FileManagersFactoryExt.CreateFileManager(true, logger, mainFolder, fileStorage);
 
         if (fileManager == null)
         {
@@ -142,7 +142,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
                     .Select(s => s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar)).ToArray();
         }
 
-        var mainFolderFileManager = FileManagersFabric.CreateFileManager(true, logger, mainFolder);
+        var mainFolderFileManager = FileManagersFactory.CreateFileManager(true, logger, mainFolder);
 
         if (mainFolderFileManager == null)
         {

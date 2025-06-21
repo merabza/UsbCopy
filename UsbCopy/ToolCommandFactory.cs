@@ -5,7 +5,7 @@ using UsbCopy.Models;
 
 namespace UsbCopy;
 
-public static class ToolCommandFabric
+public static class ToolCommandFactory
 {
     public static readonly ETools[] ToolsByProjects =
     [
