@@ -35,7 +35,7 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
         projectSubMenuSet.AddMenuItem(deleteProjectCommand);
 
         //პროექტის პარამეტრი
-        UsbCopyProjectCruder projectCruder = new(_logger, _parametersManager);
+        var projectCruder = UsbCopyProjectCruder.Create(_logger, _parametersManager);
         EditItemAllFieldsInSequenceCliMenuCommand editCommand = new(projectCruder, _projectName);
         projectSubMenuSet.AddMenuItem(editCommand);
 

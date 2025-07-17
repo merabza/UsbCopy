@@ -21,6 +21,12 @@ public sealed class UsbCopyProjectCruder : ParCruder<UsbCopyProjectModel>
         FieldEditors.Add(new ExcludeSetNameFieldEditor(nameof(UsbCopyProjectModel.ExcludeSetName), parametersManager));
     }
 
+    public static UsbCopyProjectCruder Create(ILogger logger, ParametersManager parametersManager)
+    {
+        var parameters = (UsbCopyParameters)parametersManager.Parameters;
+        return new UsbCopyProjectCruder(logger, parametersManager, parameters.Projects);
+    }
+
     //protected override Dictionary<string, ItemData> GetCrudersDictionary()
     //{
     //    var parameters = (UsbCopyParameters)ParametersManager.Parameters;

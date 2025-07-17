@@ -37,7 +37,7 @@ public sealed class UsbCopy : CliAppLoop
 
         //საჭირო მენიუს ელემენტები
 
-        UsbCopyProjectCruder usbCopyProjectCruder = new(_logger, _parametersManager);
+        var usbCopyProjectCruder = UsbCopyProjectCruder.Create(_logger, _parametersManager);
 
         //ახალი პროექტის შექმნა
         NewItemCliMenuCommand newItemCommand = new(usbCopyProjectCruder, usbCopyProjectCruder.CrudNamePlural,
