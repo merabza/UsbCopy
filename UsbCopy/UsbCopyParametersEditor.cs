@@ -2,8 +2,9 @@
 
 using CliParameters;
 using CliParameters.FieldEditors;
-using CliParametersEdit.FieldEditors;
-using CliParametersExcludeSetsEdit.FieldEditors;
+using CliParametersEdit.Cruders;
+using CliParametersExcludeSetsEdit.Cruders;
+using LibFileParameters.Models;
 using LibParameters;
 using Microsoft.Extensions.Logging;
 using UsbCopy.Models;
@@ -16,8 +17,15 @@ public sealed class UsbCopyParametersEditor : ParametersEditor
         "UsbCopy Parameters Editor", parameters, parametersManager)
     {
         FieldEditors.Add(new FolderPathFieldEditor(nameof(UsbCopyParameters.LogFolder)));
-        FieldEditors.Add(new FileStoragesFieldEditor(logger, nameof(UsbCopyParameters.FileStorages),
-            parametersManager));
-        FieldEditors.Add(new ExcludeSetsFieldEditor(nameof(UsbCopyParameters.ExcludeSets), parametersManager));
+        //FieldEditors.Add(new FileStoragesFieldEditor(logger, nameof(UsbCopyParameters.FileStorages),
+        //    parametersManager));
+        FieldEditors.Add(
+            new DictionaryFieldEditor<FileStorageCruder, FileStorageData>(nameof(UsbCopyParameters.FileStorages),
+                logger, parametersManager));
+
+        //FieldEditors.Add(new ExcludeSetsFieldEditor(nameof(UsbCopyParameters.ExcludeSets), parametersManager));
+
+        FieldEditors.Add(new DictionaryFieldEditor<ExcludeSetCruder, ExcludeSet>(nameof(UsbCopyParameters.ExcludeSets),
+            logger, parametersManager));
     }
 }
