@@ -14,13 +14,13 @@ using UsbCopy.Models;
 
 namespace UsbCopy;
 
-public sealed class UsbCopy : CliAppLoop
+public sealed class UsbCopyCliAppLoop : CliAppLoop
 {
     private readonly ILogger _logger;
     private readonly ParametersManager _parametersManager;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public UsbCopy(ILogger logger, ParametersManager parametersManager)
+    public UsbCopyCliAppLoop(ILogger logger, ParametersManager parametersManager)
     {
         _logger = logger;
         _parametersManager = parametersManager;
@@ -30,9 +30,9 @@ public sealed class UsbCopy : CliAppLoop
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
-        CliMenuSet mainMenuSet = new("Main Menu");
+        var mainMenuSet = new CliMenuSet("Main Menu");
 
-        UsbCopyParametersEditor usbCopyParametersEditor = new(parameters, _parametersManager, _logger);
+        var usbCopyParametersEditor = new UsbCopyParametersEditor(parameters, _parametersManager, _logger);
         mainMenuSet.AddMenuItem(new ParametersEditorListCliMenuCommand(usbCopyParametersEditor));
 
         //საჭირო მენიუს ელემენტები
@@ -40,7 +40,7 @@ public sealed class UsbCopy : CliAppLoop
         var usbCopyProjectCruder = UsbCopyProjectCruder.Create(_logger, _parametersManager);
 
         //ახალი პროექტის შექმნა
-        NewItemCliMenuCommand newItemCommand = new(usbCopyProjectCruder, usbCopyProjectCruder.CrudNamePlural,
+        var newItemCommand = new NewItemCliMenuCommand(usbCopyProjectCruder, usbCopyProjectCruder.CrudNamePlural,
             $"New {usbCopyProjectCruder.CrudName}");
         mainMenuSet.AddMenuItem(newItemCommand);
 

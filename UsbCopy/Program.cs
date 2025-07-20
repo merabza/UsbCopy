@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using SystemToolsShared;
+using UsbCopy;
 using UsbCopy.Models;
 
 ILogger<Program>? logger = null;
@@ -41,7 +42,7 @@ try
     }
 
     var parametersFileName = argParser.ParametersFileName;
-    ServicesCreator servicesCreator = new(par.LogFolder, null, "UsbCopy");
+    var servicesCreator = new ServicesCreator(par.LogFolder, null, "UsbCopy");
     // ReSharper disable once using
     using var serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
 
@@ -58,7 +59,7 @@ try
         return 3;
     }
 
-    UsbCopy.UsbCopy usbCopy = new(logger, new ParametersManager(parametersFileName, par));
+    var usbCopy = new UsbCopyCliAppLoop(logger, new ParametersManager(parametersFileName, par));
 
     return usbCopy.Run() ? 0 : 1;
 }

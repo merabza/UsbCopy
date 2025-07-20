@@ -26,17 +26,17 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 
     public override CliMenuSet GetSubMenu()
     {
-        CliMenuSet projectSubMenuSet = new($"Project => {_projectName}");
+        var projectSubMenuSet = new CliMenuSet($"Project => {_projectName}");
 
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
         //პროექტის წაშლა
-        DeleteUsbCopyProjectCommand deleteProjectCommand = new(_parametersManager, _projectName);
+        var deleteProjectCommand = new DeleteUsbCopyProjectCommand(_parametersManager, _projectName);
         projectSubMenuSet.AddMenuItem(deleteProjectCommand);
 
         //პროექტის პარამეტრი
         var projectCruder = UsbCopyProjectCruder.Create(_logger, _parametersManager);
-        EditItemAllFieldsInSequenceCliMenuCommand editCommand = new(projectCruder, _projectName);
+        var editCommand = new EditItemAllFieldsInSequenceCliMenuCommand(projectCruder, _projectName);
         projectSubMenuSet.AddMenuItem(editCommand);
 
         projectCruder.FillDetailsSubMenu(projectSubMenuSet, _projectName);

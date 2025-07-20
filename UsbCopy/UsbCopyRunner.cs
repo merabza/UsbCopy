@@ -104,7 +104,7 @@ public sealed class UsbCopyRunner : ToolCommand
 
     private static FolderFilesModel GetFolderFiles(List<string> fileNames)
     {
-        FolderFilesModel folderFiles = new();
+        var folderFiles = new FolderFilesModel();
         foreach (var fileName in fileNames)
         {
             var (dateTimeByDigits, pattern) = fileName.GetDateTimeAndPatternByDigits("yyyyMMddHHmmssfffffff");

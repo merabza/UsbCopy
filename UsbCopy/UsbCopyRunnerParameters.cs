@@ -62,7 +62,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        FileStorages fileStorages = new(usbCopyParameters.FileStorages);
+        var fileStorages = new FileStorages(usbCopyParameters.FileStorages);
 
         //Check FileStorage
         if (string.IsNullOrWhiteSpace(project.FileStorageName))
@@ -128,7 +128,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
         //Check ExcludeSet
         if (!string.IsNullOrWhiteSpace(project.ExcludeSetName))
         {
-            ExcludeSets excludeSets = new(usbCopyParameters.ExcludeSets);
+            var excludeSets = new ExcludeSets(usbCopyParameters.ExcludeSets);
             var excludeSet = excludeSets.GetExcludeSetByKey(project.ExcludeSetName);
 
             if (excludeSet is null)
@@ -150,7 +150,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        UsbCopyRunnerParameters usbCopyRunnerParameters = new(
+        var usbCopyRunnerParameters = new UsbCopyRunnerParameters(
             //project.LocalPath, fileStorage, 
             mainFolderFileManager, fileManager, mainFolder, excludes);
         return usbCopyRunnerParameters;
