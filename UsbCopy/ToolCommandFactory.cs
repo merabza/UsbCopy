@@ -22,7 +22,7 @@ public static class ToolCommandFactory
 
                 var usbCopyRunnerParameters = UsbCopyRunnerParameters.Create(logger, usbCopyParameters, projectName);
                 if (usbCopyRunnerParameters is not null)
-                    return new UsbCopyRunner(logger, true, usbCopyRunnerParameters, parametersManager);
+                    return new UsbCopyRunnerCommand(logger, true, usbCopyRunnerParameters, parametersManager);
                 StShared.WriteErrorLine("UsbCopyRunnerParameters does not created", true);
                 return null;
             default:

@@ -12,7 +12,7 @@ using UsbCopy.Models;
 
 namespace UsbCopy;
 
-public sealed class UsbCopyRunner : ToolCommand
+public sealed class UsbCopyRunnerCommand : ToolCommand
 {
     private const string ActionName = "Copy Files";
     private const string ActionDescription = "This will Copy Files to specified storage";
@@ -21,7 +21,7 @@ public sealed class UsbCopyRunner : ToolCommand
     private readonly bool _useConsole;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public UsbCopyRunner(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
+    public UsbCopyRunnerCommand(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
         IParametersManager? parametersManager) : base(logger, ActionName, usbCopyRunnerParameters, parametersManager,
         ActionDescription)
     {
