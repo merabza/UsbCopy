@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
-using CliMenu;
-using LibParameters;
+using AppCliTools.CliMenu;
 using Microsoft.Extensions.Logging;
-using SystemToolsShared;
+using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
 
 namespace UsbCopy.Commands;
 

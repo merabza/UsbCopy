@@ -1,12 +1,12 @@
 //Created by ProjectParametersEditorClassCreator at 6/28/2021 12:52:58
 
-using CliParameters;
-using CliParameters.FieldEditors;
-using CliParametersEdit.Cruders;
-using CliParametersExcludeSetsEdit.Cruders;
-using LibFileParameters.Models;
-using LibParameters;
+using AppCliTools.CliParameters;
+using AppCliTools.CliParameters.FieldEditors;
+using AppCliTools.CliParametersEdit.Cruders;
+using AppCliTools.CliParametersExcludeSetsEdit.Cruders;
 using Microsoft.Extensions.Logging;
+using ParametersManagement.LibFileParameters.Models;
+using ParametersManagement.LibParameters;
 using UsbCopy.Models;
 
 namespace UsbCopy;

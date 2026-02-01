@@ -1,7 +1,7 @@
-﻿using CliMenu;
-using LibDataInput;
-using LibParameters;
-using SystemToolsShared;
+﻿using AppCliTools.CliMenu;
+using AppCliTools.LibDataInput;
+using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
 using UsbCopy.Models;
 
 namespace UsbCopy.Commands;

@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CliParameters;
-using LibParameters;
+using AppCliTools.CliParameters;
 using Microsoft.Extensions.Logging;
-using SystemToolsShared;
+using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
 using UsbCopy.Models;
 
 namespace UsbCopy;

@@ -2,13 +2,13 @@
 
 using System;
 using System.Linq;
-using CliMenu;
-using CliParameters.CliMenuCommands;
-using CliTools;
-using CliTools.CliMenuCommands;
-using LibDataInput;
-using LibParameters;
+using AppCliTools.CliMenu;
+using AppCliTools.CliParameters.CliMenuCommands;
+using AppCliTools.CliTools;
+using AppCliTools.CliTools.CliMenuCommands;
+using AppCliTools.LibDataInput;
 using Microsoft.Extensions.Logging;
+using ParametersManagement.LibParameters;
 using UsbCopy.Commands;
 using UsbCopy.Models;
 

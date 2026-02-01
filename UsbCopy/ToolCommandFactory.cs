@@ -1,6 +1,6 @@
-﻿using LibParameters;
-using Microsoft.Extensions.Logging;
-using SystemToolsShared;
+﻿using Microsoft.Extensions.Logging;
+using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
 using UsbCopy.Models;
 
 namespace UsbCopy;

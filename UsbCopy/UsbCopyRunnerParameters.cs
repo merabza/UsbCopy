@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FileManagersMain;
-using LibDataInput;
-using LibFileParameters.Models;
-using LibParameters;
+using AppCliTools.LibDataInput;
 using Microsoft.Extensions.Logging;
-using SystemToolsShared;
+using ParametersManagement.LibFileParameters.Models;
+using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
+using ToolsManagement.FileManagersMain;
 using UsbCopy.Models;
 
 namespace UsbCopy;

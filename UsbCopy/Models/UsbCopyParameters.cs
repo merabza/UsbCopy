@@ -2,8 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using LibFileParameters.Interfaces;
-using LibFileParameters.Models;
+using ParametersManagement.LibFileParameters.Interfaces;
+using ParametersManagement.LibFileParameters.Models;
 
 namespace UsbCopy.Models;
 
@@ -24,7 +24,7 @@ public sealed class UsbCopyParameters : IParametersWithFileStorages, IParameters
 
     public UsbCopyProjectModel? GetProject(string projectName)
     {
-        return !Projects.ContainsKey(projectName) ? null : Projects[projectName];
+        return Projects.GetValueOrDefault(projectName);
     }
 
     public UsbCopyProjectModel GetProjectRequired(string projectName)

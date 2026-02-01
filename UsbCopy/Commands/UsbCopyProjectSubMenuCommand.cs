@@ -1,9 +1,9 @@
 ﻿using System;
-using CliMenu;
-using CliParameters.CliMenuCommands;
-using LibDataInput;
-using LibParameters;
+using AppCliTools.CliMenu;
+using AppCliTools.CliParameters.CliMenuCommands;
+using AppCliTools.LibDataInput;
 using Microsoft.Extensions.Logging;
+using ParametersManagement.LibParameters;
 using UsbCopy.Models;
 
 namespace UsbCopy.Commands;

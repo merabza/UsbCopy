@@ -1,13 +1,13 @@
 //Created by ProgramClassCreator at 6/28/2021 12:52:58
 
 using System;
-using CliParameters;
-using LibParameters;
+using AppCliTools.CliParameters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ParametersManagement.LibParameters;
 using Serilog;
 using Serilog.Events;
-using SystemToolsShared;
+using SystemTools.SystemToolsShared;
 using UsbCopy;
 using UsbCopy.Models;
 

@@ -1,4 +1,4 @@
-﻿using LibParameters;
+﻿using ParametersManagement.LibParameters;
 
 namespace UsbCopy.Models;
 

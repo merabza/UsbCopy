@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using CliParameters;
-using CliParameters.FieldEditors;
-using CliParametersEdit.FieldEditors;
-using CliParametersExcludeSetsEdit.FieldEditors;
-using LibParameters;
+using AppCliTools.CliParameters;
+using AppCliTools.CliParameters.FieldEditors;
+using AppCliTools.CliParametersEdit.FieldEditors;
+using AppCliTools.CliParametersExcludeSetsEdit.FieldEditors;
 using Microsoft.Extensions.Logging;
+using ParametersManagement.LibParameters;
 using UsbCopy.Models;
 
 namespace UsbCopy;

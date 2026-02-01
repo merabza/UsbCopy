@@ -5,30 +5,29 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/AppCliTools/">
-    <Project Path="../AppCliTools/CliMenu/CliMenu.csproj" />
-    <Project Path="../AppCliTools/CliParameters/CliParameters.csproj" />
-    <Project Path="../AppCliTools/CliParametersEdit/CliParametersEdit.csproj" />
-    <Project Path="../AppCliTools/CliParametersExcludeSetsEdit/CliParametersExcludeSetsEdit.csproj" />
-    <Project Path="../AppCliTools/CliTools/CliTools.csproj" />
-    <Project Path="../AppCliTools/LibDataInput/LibDataInput.csproj" />
-    <Project Path="../AppCliTools/LibMenuInput/LibMenuInput.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.CliMenu/AppCliTools.CliMenu.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.CliParameters/AppCliTools.CliParameters.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.CliParametersEdit/AppCliTools.CliParametersEdit.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.CliParametersExcludeSetsEdit/AppCliTools.CliParametersExcludeSetsEdit.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.CliTools/AppCliTools.CliTools.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.LibDataInput/AppCliTools.LibDataInput.csproj" />
+    <Project Path="../AppCliTools/AppCliTools.LibMenuInput/AppCliTools.LibMenuInput.csproj" />
   </Folder>
   <Folder Name="/ConnectionTools/">
-    <Project Path="../ConnectionTools/ConnectTools/ConnectTools.csproj" />
-    <Project Path="../ConnectionTools/CToolsFactory/CToolsFactory.csproj" />
-    <Project Path="../ConnectionTools/FTPTools/FTPTools.csproj" />
+    <Project Path="../ConnectionTools/ConnectionTools.ConnectTools/ConnectionTools.ConnectTools.csproj" />
+    <Project Path="../ConnectionTools/ConnectionTools.CToolsFactory/ConnectionTools.CToolsFactory.csproj" />
+    <Project Path="../ConnectionTools/ConnectionTools.FTPTools/ConnectionTools.FTPTools.csproj" />
   </Folder>
   <Folder Name="/ParametersManagement/">
-    <Project Path="../ParametersManagement/LibFileParameters/LibFileParameters.csproj" />
-    <Project Path="../ParametersManagement/LibParameters/LibParameters.csproj" />
+    <Project Path="../ParametersManagement/ParametersManagement.LibFileParameters/ParametersManagement.LibFileParameters.csproj" />
+    <Project Path="../ParametersManagement/ParametersManagement.LibParameters/ParametersManagement.LibParameters.csproj" />
   </Folder>
   <Folder Name="/SystemTools/">
-    <Project Path="../SystemTools/SystemToolsShared.Tests/SystemToolsShared.Tests.csproj" />
-    <Project Path="../SystemTools/SystemToolsShared/SystemToolsShared.csproj" />
+    <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
   </Folder>
   <Folder Name="/ToolsManagement/">
-    <Project Path="../ToolsManagement/FileManagersMain/FileManagersMain.csproj" />
-    <Project Path="../ToolsManagement/LibToolActions/LibToolActions.csproj" />
+    <Project Path="../ToolsManagement/ToolsManagement.FileManagersMain/ToolsManagement.FileManagersMain.csproj" />
+    <Project Path="../ToolsManagement/ToolsManagement.LibToolActions/ToolsManagement.LibToolActions.csproj" />
   </Folder>
   <Project Path="UsbCopy/UsbCopy.csproj" />
 </Solution>
