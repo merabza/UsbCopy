@@ -5,10 +5,6 @@
     <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliParametersEdit\AppCliTools.CliParametersEdit.csproj" />
     <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliParametersExcludeSetsEdit\AppCliTools.CliParametersExcludeSetsEdit.csproj" />
     <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliParameters\AppCliTools.CliParameters.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\CliParametersEdit\CliParametersEdit.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\CliParametersExcludeSetsEdit\CliParametersExcludeSetsEdit.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\CliParameters\CliParameters.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\CliTools\CliTools.csproj" />
     <ProjectReference Include="..\..\ParametersManagement\ParametersManagement.LibFileParameters\ParametersManagement.LibFileParameters.csproj" />
     <ProjectReference Include="..\..\ParametersManagement\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
     <ProjectReference Include="..\..\ToolsManagement\ToolsManagement.FileManagersMain\ToolsManagement.FileManagersMain.csproj" />
