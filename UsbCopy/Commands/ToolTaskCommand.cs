@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using AppCliTools.CliMenu;
 using Microsoft.Extensions.Logging;
 using ParametersManagement.LibParameters;
@@ -24,12 +25,14 @@ public sealed class ToolTaskCommand : CliMenuCommand
         _parametersManager = parametersManager;
     }
 
-    protected override bool RunBody()
+    protected override async ValueTask<bool> RunBody(CancellationToken cancellationToken = default)
     {
         var toolCommand = ToolCommandFactory.Create(_logger, _tool, _projectName, _parametersManager);
 
         if (toolCommand?.Par != null)
-            return toolCommand.Run(CancellationToken.None).Result;
+        {
+            return await toolCommand.Run(cancellationToken);
+        }
 
         Console.WriteLine("Parameters not loaded. Tool not started.");
         StShared.Pause();

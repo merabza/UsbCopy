@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using AppCliTools.LibDataInput;
@@ -96,17 +97,26 @@ public sealed class UsbCopyRunnerParameters : IParameters
         {
             var (dateTimeByDigits, pattern) = folderName.GetDateTimeAndPatternByDigits(folderMask);
             if (pattern is not null)
+            {
                 buFileInfos.Add(new BuFileInfo(folderName, dateTimeByDigits));
+            }
         }
 
         BuFileInfo? lastFolderName = null;
-        if (buFileInfos.Count > 0) lastFolderName = buFileInfos.MaxBy(ob => ob.FileDateTime);
+        if (buFileInfos.Count > 0)
+        {
+            lastFolderName = buFileInfos.MaxBy(ob => ob.FileDateTime);
+        }
 
-        if (lastFolderName != null)
-            if (!Inputer.InputBool($"Continue with existing folder {lastFolderName.FileName}", false, false))
-                lastFolderName = null;
+        if (lastFolderName != null &&
+            !Inputer.InputBool($"Continue with existing folder {lastFolderName.FileName}", false, false))
+        {
+            lastFolderName = null;
+        }
 
-        var mainFolderName = lastFolderName == null ? DateTime.Now.ToString(folderMask) : lastFolderName.FileName;
+        var mainFolderName = lastFolderName is null
+            ? DateTime.Now.ToString(folderMask, CultureInfo.InvariantCulture)
+            : lastFolderName.FileName;
         var mainFolderFullPath = Path.Combine(project.LocalPath, mainFolderName);
 
         var mainFolder = FileStat.CreateFolderIfNotExists(mainFolderFullPath, true, logger);
@@ -138,8 +148,10 @@ public sealed class UsbCopyRunnerParameters : IParameters
             }
 
             if (excludeSet.FolderFileMasks is { Count: > 0 })
+            {
                 excludes = excludeSet.FolderFileMasks
                     .Select(s => s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar)).ToArray();
+            }
         }
 
         var mainFolderFileManager = FileManagersFactory.CreateFileManager(true, logger, mainFolder);

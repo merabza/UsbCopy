@@ -1,6 +1,7 @@
 //Created by ProgramClassCreator at 6/28/2021 12:52:58
 
 using System;
+using System.Runtime.CompilerServices;
 using AppCliTools.CliParameters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,7 +32,7 @@ try
         case EParseResult.Ok: break;
         case EParseResult.Usage: return 1;
         case EParseResult.Error: return 2;
-        default: throw new ArgumentOutOfRangeException();
+        default: throw new SwitchExpressionException();
     }
 
     var par = (UsbCopyParameters?)argParser.Par;
@@ -44,7 +45,7 @@ try
     var parametersFileName = argParser.ParametersFileName;
     var servicesCreator = new ServicesCreator(par.LogFolder, null, "UsbCopy");
     // ReSharper disable once using
-    using var serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
+    await using var serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
 
     if (serviceProvider == null)
     {
@@ -61,7 +62,7 @@ try
 
     var usbCopy = new UsbCopyCliAppLoop(logger, new ParametersManager(parametersFileName, par));
 
-    return usbCopy.Run() ? 0 : 1;
+    return await usbCopy.Run() ? 0 : 1;
 }
 catch (Exception e)
 {
@@ -70,5 +71,5 @@ catch (Exception e)
 }
 finally
 {
-    Log.CloseAndFlush();
+    await Log.CloseAndFlushAsync();
 }

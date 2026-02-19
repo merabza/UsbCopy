@@ -1,4 +1,6 @@
-﻿using AppCliTools.CliMenu;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AppCliTools.CliMenu;
 using AppCliTools.LibDataInput;
 using ParametersManagement.LibParameters;
 using SystemTools.SystemToolsShared;
@@ -19,7 +21,7 @@ public sealed class DeleteUsbCopyProjectCommand : CliMenuCommand
         _projectName = projectName;
     }
 
-    protected override bool RunBody()
+    protected override ValueTask<bool> RunBody(CancellationToken cancellationToken = default)
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
@@ -27,15 +29,17 @@ public sealed class DeleteUsbCopyProjectCommand : CliMenuCommand
         if (!projects.ContainsKey(_projectName))
         {
             StShared.WriteErrorLine($"Project {_projectName} not found", true);
-            return false;
+            return new ValueTask<bool>(false);
         }
 
         if (!Inputer.InputBool($"This will Delete Project {_projectName}. are you sure?", false, false))
-            return false;
+        {
+            return new ValueTask<bool>(false);
+        }
 
         projects.Remove(_projectName);
         _parametersManager.Save(parameters, $"Project {_projectName} Deleted");
 
-        return true;
+        return new ValueTask<bool>(true);
     }
 }

@@ -54,9 +54,15 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
         {
             var folderAfterRootFullName = fileManager.PathCombine(afterRootPath, folderName);
             if (NeedExclude(folderAfterRootFullName))
+            {
                 continue;
+            }
+
             if (folderName.Contains('#') || folderName.Contains('@'))
+            {
                 continue;
+            }
+
             Console.WriteLine(folderAfterRootFullName);
             ProcessFolder(folderAfterRootFullName);
         }
@@ -65,7 +71,9 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
             .Where(file => !NeedExclude(fileManager.PathCombine(afterRootPath, file))).ToList();
 
         if (files.Count == 0)
+        {
             return;
+        }
 
         var localAfterRootPath =
             afterRootPath?.Replace(fileManager.DirectorySeparatorChar, Path.DirectorySeparatorChar);
@@ -83,7 +91,9 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
         foreach (var fileName in folderFiles.Files.OrderBy(o => o))
         {
             if (localFileManager.FileExists(afterRootPath, fileName))
+            {
                 continue;
+            }
 
             Console.WriteLine("File {0}", fileName);
             fileManager.DownloadFile(fileName, "dwn", afterRootPath);
@@ -94,7 +104,9 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
             var fileInfo = kvp.Value.OrderByDescending(o => o.FileDateTime).First();
 
             if (localFileManager.FileExists(afterRootPath, fileInfo.FileName))
+            {
                 continue;
+            }
 
             Console.WriteLine("Mask {0}", kvp.Key);
             Console.WriteLine("File By Mask {0}", fileInfo.FileName);
@@ -111,10 +123,13 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
 
             if (pattern != null)
             {
-                if (!folderFiles.FileByPatterns.ContainsKey(pattern))
-                    folderFiles.FileByPatterns.Add(pattern, new List<BuFileInfo>());
+                if (!folderFiles.FileByPatterns.TryGetValue(pattern, out List<BuFileInfo>? value))
+                {
+                    value = [];
+                    folderFiles.FileByPatterns.Add(pattern, value);
+                }
 
-                folderFiles.FileByPatterns[pattern].Add(new BuFileInfo(fileName, dateTimeByDigits));
+                value.Add(new BuFileInfo(fileName, dateTimeByDigits));
             }
             else
             {
