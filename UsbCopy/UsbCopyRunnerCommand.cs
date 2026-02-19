@@ -8,6 +8,7 @@ using AppCliTools.CliParameters;
 using Microsoft.Extensions.Logging;
 using ParametersManagement.LibParameters;
 using SystemTools.SystemToolsShared;
+using ToolsManagement.FileManagersMain;
 using UsbCopy.Models;
 
 namespace UsbCopy;
@@ -47,12 +48,12 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
 
     private void ProcessFolder(string? afterRootPath = null)
     {
-        var fileManager = UsbCopyRunnerParameters.FileManager;
-        var localFileManager = UsbCopyRunnerParameters.MainFolderFileManager;
-        var folderNames = fileManager.GetFolderNames(afterRootPath, null);
-        foreach (var folderName in folderNames.OrderBy(o => o))
+        FileManager fileManager = UsbCopyRunnerParameters.FileManager;
+        FileManager localFileManager = UsbCopyRunnerParameters.MainFolderFileManager;
+        List<string> folderNames = fileManager.GetFolderNames(afterRootPath, null);
+        foreach (string folderName in folderNames.OrderBy(o => o))
         {
-            var folderAfterRootFullName = fileManager.PathCombine(afterRootPath, folderName);
+            string folderAfterRootFullName = fileManager.PathCombine(afterRootPath, folderName);
             if (NeedExclude(folderAfterRootFullName))
             {
                 continue;
@@ -67,7 +68,7 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
             ProcessFolder(folderAfterRootFullName);
         }
 
-        var files = fileManager.GetFileNames(afterRootPath, null)
+        List<string> files = fileManager.GetFileNames(afterRootPath, null)
             .Where(file => !NeedExclude(fileManager.PathCombine(afterRootPath, file))).ToList();
 
         if (files.Count == 0)
@@ -75,20 +76,20 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
             return;
         }
 
-        var localAfterRootPath =
+        string? localAfterRootPath =
             afterRootPath?.Replace(fileManager.DirectorySeparatorChar, Path.DirectorySeparatorChar);
-        var path = localAfterRootPath == null
+        string path = localAfterRootPath == null
             ? UsbCopyRunnerParameters.MainFolder
             : Path.Combine(UsbCopyRunnerParameters.MainFolder, localAfterRootPath);
-        var localPatchChecked = FileStat.CreateFolderIfNotExists(path, _useConsole, _logger);
+        string? localPatchChecked = FileStat.CreateFolderIfNotExists(path, _useConsole, _logger);
         if (localPatchChecked == null)
         {
             StShared.WriteErrorLine($"Cannot Create Folder {path}", _useConsole, _logger);
             return;
         }
 
-        var folderFiles = GetFolderFiles(files);
-        foreach (var fileName in folderFiles.Files.OrderBy(o => o))
+        FolderFilesModel folderFiles = GetFolderFiles(files);
+        foreach (string fileName in folderFiles.Files.OrderBy(o => o))
         {
             if (localFileManager.FileExists(afterRootPath, fileName))
             {
@@ -99,9 +100,9 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
             fileManager.DownloadFile(fileName, "dwn", afterRootPath);
         }
 
-        foreach (var kvp in folderFiles.FileByPatterns.OrderBy(k => k.Key))
+        foreach (KeyValuePair<string, List<BuFileInfo>> kvp in folderFiles.FileByPatterns.OrderBy(k => k.Key))
         {
-            var fileInfo = kvp.Value.OrderByDescending(o => o.FileDateTime).First();
+            BuFileInfo fileInfo = kvp.Value.OrderByDescending(o => o.FileDateTime).First();
 
             if (localFileManager.FileExists(afterRootPath, fileInfo.FileName))
             {
@@ -117,9 +118,10 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
     private static FolderFilesModel GetFolderFiles(List<string> fileNames)
     {
         var folderFiles = new FolderFilesModel();
-        foreach (var fileName in fileNames)
+        foreach (string fileName in fileNames)
         {
-            var (dateTimeByDigits, pattern) = fileName.GetDateTimeAndPatternByDigits("yyyyMMddHHmmssfffffff");
+            (DateTime dateTimeByDigits, string? pattern) =
+                fileName.GetDateTimeAndPatternByDigits("yyyyMMddHHmmssfffffff");
 
             if (pattern != null)
             {

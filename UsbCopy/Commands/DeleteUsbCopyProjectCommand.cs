@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AppCliTools.CliMenu;
 using AppCliTools.LibDataInput;
@@ -25,7 +26,7 @@ public sealed class DeleteUsbCopyProjectCommand : CliMenuCommand
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
-        var projects = parameters.Projects;
+        Dictionary<string, UsbCopyProjectModel> projects = parameters.Projects;
         if (!projects.ContainsKey(_projectName))
         {
             StShared.WriteErrorLine($"Project {_projectName} not found", true);

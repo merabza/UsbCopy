@@ -24,7 +24,7 @@ try
     ProgramAttributes.Instance.AppName = appName;
     ProgramAttributes.Instance.AppKey = appKey;
 
-    var key = appKey + Environment.MachineName.Capitalize();
+    string key = appKey + Environment.MachineName.Capitalize();
 
     var argParser = new ArgumentsParser<UsbCopyParameters>(args, "UsbCopy", key);
     switch (argParser.Analysis())
@@ -42,10 +42,10 @@ try
         return 3;
     }
 
-    var parametersFileName = argParser.ParametersFileName;
+    string? parametersFileName = argParser.ParametersFileName;
     var servicesCreator = new ServicesCreator(par.LogFolder, null, "UsbCopy");
     // ReSharper disable once using
-    await using var serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
+    await using ServiceProvider? serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
 
     if (serviceProvider == null)
     {

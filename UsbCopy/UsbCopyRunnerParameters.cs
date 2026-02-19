@@ -37,7 +37,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
     internal static UsbCopyRunnerParameters? Create(ILogger logger, UsbCopyParameters usbCopyParameters,
         string projectName)
     {
-        var project = usbCopyParameters.GetProjectRequired(projectName);
+        UsbCopyProjectModel project = usbCopyParameters.GetProjectRequired(projectName);
 
         //var drives = DriveInfo.GetDrives()
         //    .Where(drive => drive.IsReady && drive.DriveType == DriveType.Removable).ToList();
@@ -56,7 +56,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var localPathChecked = FileStat.CreateFolderIfNotExists(project.LocalPath, true, logger);
+        string? localPathChecked = FileStat.CreateFolderIfNotExists(project.LocalPath, true, logger);
         if (localPathChecked == null)
         {
             StShared.WriteErrorLine($"local path {project.LocalPath} can not be created", true, logger);
@@ -72,7 +72,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var fileStorage = fileStorages.GetFileStorageDataByKey(project.FileStorageName);
+        FileStorageData? fileStorage = fileStorages.GetFileStorageDataByKey(project.FileStorageName);
 
         if (fileStorage == null)
         {
@@ -80,7 +80,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var localFileManager = FileManagersFactory.CreateFileManager(true, logger, project.LocalPath);
+        FileManager? localFileManager = FileManagersFactory.CreateFileManager(true, logger, project.LocalPath);
 
         if (localFileManager == null)
         {
@@ -88,14 +88,14 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var folderNames = localFileManager.GetFolderNames(string.Empty, null);
+        List<string> folderNames = localFileManager.GetFolderNames(string.Empty, null);
 
         const string folderMask = "yyyyMMddHHmmss";
         List<BuFileInfo> buFileInfos = [];
 
-        foreach (var folderName in folderNames)
+        foreach (string folderName in folderNames)
         {
-            var (dateTimeByDigits, pattern) = folderName.GetDateTimeAndPatternByDigits(folderMask);
+            (DateTime dateTimeByDigits, string? pattern) = folderName.GetDateTimeAndPatternByDigits(folderMask);
             if (pattern is not null)
             {
                 buFileInfos.Add(new BuFileInfo(folderName, dateTimeByDigits));
@@ -114,19 +114,19 @@ public sealed class UsbCopyRunnerParameters : IParameters
             lastFolderName = null;
         }
 
-        var mainFolderName = lastFolderName is null
+        string mainFolderName = lastFolderName is null
             ? DateTime.Now.ToString(folderMask, CultureInfo.InvariantCulture)
             : lastFolderName.FileName;
-        var mainFolderFullPath = Path.Combine(project.LocalPath, mainFolderName);
+        string mainFolderFullPath = Path.Combine(project.LocalPath, mainFolderName);
 
-        var mainFolder = FileStat.CreateFolderIfNotExists(mainFolderFullPath, true, logger);
+        string? mainFolder = FileStat.CreateFolderIfNotExists(mainFolderFullPath, true, logger);
         if (mainFolder is null)
         {
             StShared.WriteErrorLine($"Main folder path {mainFolderFullPath} can not be created", true, logger);
             return null;
         }
 
-        var fileManager = FileManagersFactoryExt.CreateFileManager(true, logger, mainFolder, fileStorage);
+        FileManager? fileManager = FileManagersFactoryExt.CreateFileManager(true, logger, mainFolder, fileStorage);
 
         if (fileManager == null)
         {
@@ -134,12 +134,12 @@ public sealed class UsbCopyRunnerParameters : IParameters
             return null;
         }
 
-        var excludes = Array.Empty<string>();
+        string[] excludes = Array.Empty<string>();
         //Check ExcludeSet
         if (!string.IsNullOrWhiteSpace(project.ExcludeSetName))
         {
             var excludeSets = new ExcludeSets(usbCopyParameters.ExcludeSets);
-            var excludeSet = excludeSets.GetExcludeSetByKey(project.ExcludeSetName);
+            ExcludeSet? excludeSet = excludeSets.GetExcludeSetByKey(project.ExcludeSetName);
 
             if (excludeSet is null)
             {
@@ -154,7 +154,7 @@ public sealed class UsbCopyRunnerParameters : IParameters
             }
         }
 
-        var mainFolderFileManager = FileManagersFactory.CreateFileManager(true, logger, mainFolder);
+        FileManager? mainFolderFileManager = FileManagersFactory.CreateFileManager(true, logger, mainFolder);
 
         if (mainFolderFileManager == null)
         {

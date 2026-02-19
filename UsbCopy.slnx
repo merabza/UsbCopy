@@ -22,6 +22,11 @@
     <Project Path="../ParametersManagement/ParametersManagement.LibFileParameters/ParametersManagement.LibFileParameters.csproj" />
     <Project Path="../ParametersManagement/ParametersManagement.LibParameters/ParametersManagement.LibParameters.csproj" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
   <Folder Name="/SystemTools/">
     <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
   </Folder>

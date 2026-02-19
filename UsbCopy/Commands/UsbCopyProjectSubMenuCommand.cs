@@ -42,18 +42,18 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 
         projectCruder.FillDetailsSubMenu(projectSubMenuSet, _projectName);
 
-        var project = parameters.GetProject(_projectName);
+        UsbCopyProjectModel? project = parameters.GetProject(_projectName);
 
         if (project != null)
         {
-            foreach (var tool in ToolCommandFactory.ToolsByProjects)
+            foreach (ETools tool in ToolCommandFactory.ToolsByProjects)
             {
                 projectSubMenuSet.AddMenuItem(new ToolTaskCommand(_logger, tool, _projectName, _parametersManager));
             }
         }
 
         //მთავარ მენიუში გასვლა
-        var key = ConsoleKey.Escape.Value().ToLower(CultureInfo.CurrentCulture);
+        string key = ConsoleKey.Escape.Value().ToLower(CultureInfo.CurrentCulture);
         projectSubMenuSet.AddMenuItem(key, new ExitToMainMenuCliMenuCommand("Exit to Main menu", null), key.Length);
 
         return projectSubMenuSet;

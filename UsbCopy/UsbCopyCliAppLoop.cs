@@ -1,6 +1,7 @@
 //Created by ProjectMainClassCreatorForCliAppWithMenu at 6/28/2021 12:52:58
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AppCliTools.CliMenu;
@@ -46,13 +47,13 @@ public sealed class UsbCopyCliAppLoop : CliAppLoop
         mainMenuSet.AddMenuItem(newItemCommand);
 
         //პროექტების ჩამონათვალი
-        foreach (var kvp in parameters.Projects.OrderBy(o => o.Key))
+        foreach (KeyValuePair<string, UsbCopyProjectModel> kvp in parameters.Projects.OrderBy(o => o.Key))
         {
             mainMenuSet.AddMenuItem(new UsbCopyProjectSubMenuCommand(_logger, _parametersManager, kvp.Key));
         }
 
         //გასასვლელი
-        var key = ConsoleKey.Escape.Value().ToLower(CultureInfo.CurrentCulture);
+        string key = ConsoleKey.Escape.Value().ToLower(CultureInfo.CurrentCulture);
         mainMenuSet.AddMenuItem(key, new ExitCliMenuCommand(), key.Length);
 
         return mainMenuSet;
