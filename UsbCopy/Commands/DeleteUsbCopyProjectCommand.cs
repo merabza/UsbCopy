@@ -22,7 +22,7 @@ public sealed class DeleteUsbCopyProjectCommand : CliMenuCommand
         _projectName = projectName;
     }
 
-    protected override ValueTask<bool> RunBody(CancellationToken cancellationToken = default)
+    protected override async ValueTask<bool> RunBody(CancellationToken cancellationToken = default)
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
 
@@ -30,17 +30,17 @@ public sealed class DeleteUsbCopyProjectCommand : CliMenuCommand
         if (!projects.ContainsKey(_projectName))
         {
             StShared.WriteErrorLine($"Project {_projectName} not found", true);
-            return new ValueTask<bool>(false);
+            return false;
         }
 
         if (!Inputer.InputBool($"This will Delete Project {_projectName}. are you sure?", false, false))
         {
-            return new ValueTask<bool>(false);
+            return false;
         }
 
         projects.Remove(_projectName);
-        _parametersManager.Save(parameters, $"Project {_projectName} Deleted");
+        await _parametersManager.Save(parameters, $"Project {_projectName} Deleted", null, cancellationToken);
 
-        return new ValueTask<bool>(true);
+        return true;
     }
 }
