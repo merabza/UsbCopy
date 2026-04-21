@@ -6,12 +6,10 @@ namespace UsbCopy;
 
 public class UsbCopyApplication : IApplication
 {
-    private readonly string _appName;
-
     public UsbCopyApplication(IOptions<ApplicationOptions> options)
     {
-        _appName = options.Value.AppName;
+        AppName = options.Value.AppName;
     }
 
-    public string AppName => _appName;
+    public string AppName { get; }
 }

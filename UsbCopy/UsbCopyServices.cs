@@ -1,4 +1,6 @@
 ﻿using System;
+using AppCliTools.CliMenu;
+using AppCliTools.CliMenu.DependencyInjection;
 using AppCliTools.CliTools.DependencyInjection;
 using AppCliTools.CliTools.Models;
 using AppCliTools.CliTools.Services.MenuBuilder;
@@ -6,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ParametersManagement.LibParameters;
 using Serilog.Events;
 using SystemTools.SystemToolsShared;
+using UsbCopy.Menu.ProjectsList;
+using UsbCopy.Menu.UsbCopyParametersEdit;
 using UsbCopy.Models;
 
 namespace UsbCopy;
@@ -21,12 +25,12 @@ public static class UsbCopyServices
             //.AddHttpClient()
             //.AddMemoryCache()
             //.AddSingleton<MenuParameters>()
-            //.AddTransientAllStrategies<IMenuCommandListFactoryStrategy>(
-            //    typeof(ProjectGroupsListFactoryStrategy).Assembly)
+            .AddTransientAllStrategies<IMenuCommandListFactoryStrategy>(
+                typeof(ProjectsListFactoryStrategy).Assembly)
             //.AddSingleton<IProcesses, Processes>()
             .AddSingleton<IMenuBuilder, UsbCopyMenuBuilder>()
-            //.AddTransientAllStrategies<IMenuCommandFactoryStrategy>(
-            //    typeof(SupportToolsParametersEditorListCliMenuCommandFactoryStrategy).Assembly)
+            .AddTransientAllStrategies<IMenuCommandFactoryStrategy>(
+                typeof(UsbCopyParametersEditorListCliMenuCommandFactoryStrategy).Assembly)
             //.AddTransientAllStrategies<IToolCommandFactoryStrategy>(
             //    typeof(CorrectNewDatabaseToolCommandFactoryStrategy).Assembly,
             //    typeof(JetBrainsCleanupCodeRunnerToolCommandFactoryStrategy).Assembly,
@@ -45,14 +49,6 @@ public static class UsbCopyServices
             ;
 
         // @formatter:on
-        //if (!string.IsNullOrWhiteSpace(par.RecentCommandsFileName) && par.RecentCommandsCount > 0)
-        //{
-        //    services.AddRecentCommandsService(x =>
-        //    {
-        //        x.RecentCommandsFileName = par.RecentCommandsFileName;
-        //        x.RecentCommandsCount = par.RecentCommandsCount;
-        //    });
-        //}
 
         return services;
     }

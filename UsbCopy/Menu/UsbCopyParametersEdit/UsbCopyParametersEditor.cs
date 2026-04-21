@@ -7,7 +7,7 @@ using ParametersManagement.LibFileParameters.Models;
 using ParametersManagement.LibParameters;
 using UsbCopy.Models;
 
-namespace UsbCopy;
+namespace UsbCopy.Menu.UsbCopyParametersEdit;
 
 public sealed class UsbCopyParametersEditor : ParametersEditor
 {

@@ -6,20 +6,22 @@ using AppCliTools.CliParameters.CliMenuCommands;
 using AppCliTools.LibDataInput;
 using Microsoft.Extensions.Logging;
 using ParametersManagement.LibParameters;
+using UsbCopy.Commands;
+using UsbCopy.Cruders;
 using UsbCopy.Models;
 
-namespace UsbCopy.Commands;
+namespace UsbCopy.Menu.ProjectsList;
 
 public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 {
     private readonly ILogger _logger;
-    private readonly ParametersManager _parametersManager;
+    private readonly IParametersManager _parametersManager;
 
     private readonly string _projectName;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public UsbCopyProjectSubMenuCommand(ILogger logger, ParametersManager parametersManager, string projectName) : base(
-        projectName, EMenuAction.LoadSubMenu)
+    public UsbCopyProjectSubMenuCommand(ILogger logger, IParametersManager parametersManager, string projectName) :
+        base(projectName, EMenuAction.LoadSubMenu)
     {
         _logger = logger;
         _parametersManager = parametersManager;
@@ -47,10 +49,7 @@ public sealed class UsbCopyProjectSubMenuCommand : CliMenuCommand
 
         if (project != null)
         {
-            foreach (ETools tool in ToolCommandFactory.ToolsByProjects)
-            {
-                projectSubMenuSet.AddMenuItem(new ToolTaskCommand(_logger, tool, _projectName, _parametersManager));
-            }
+            projectSubMenuSet.AddMenuItem(new CopyFilesCliMenuCommand(_logger, _projectName, _parametersManager));
         }
 
         //მთავარ მენიუში გასვლა

@@ -11,12 +11,12 @@ namespace UsbCopy.Commands;
 
 public sealed class DeleteUsbCopyProjectCommand : CliMenuCommand
 {
-    private readonly ParametersManager _parametersManager;
+    private readonly IParametersManager _parametersManager;
     private readonly string _projectName;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public DeleteUsbCopyProjectCommand(ParametersManager parametersManager, string projectName) : base("Delete Project",
-        EMenuAction.LevelUp, EMenuAction.Reload, projectName)
+    public DeleteUsbCopyProjectCommand(IParametersManager parametersManager, string projectName) : base(
+        "Delete Project", EMenuAction.LevelUp, EMenuAction.Reload, projectName)
     {
         _parametersManager = parametersManager;
         _projectName = projectName;

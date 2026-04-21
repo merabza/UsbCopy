@@ -11,9 +11,9 @@ using SystemTools.SystemToolsShared;
 using ToolsManagement.FileManagersMain;
 using UsbCopy.Models;
 
-namespace UsbCopy;
+namespace UsbCopy.ToolCommands;
 
-public sealed class UsbCopyRunnerCommand : ToolCommand
+public sealed class UsbCopyRunnerToolCommand : ToolCommand
 {
     private const string ActionName = "Copy Files";
     private const string ActionDescription = "This will Copy Files to specified storage";
@@ -22,7 +22,7 @@ public sealed class UsbCopyRunnerCommand : ToolCommand
     private readonly bool _useConsole;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public UsbCopyRunnerCommand(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
+    public UsbCopyRunnerToolCommand(ILogger logger, bool useConsole, UsbCopyRunnerParameters usbCopyRunnerParameters,
         IParametersManager? parametersManager) : base(logger, ActionName, usbCopyRunnerParameters, parametersManager,
         ActionDescription)
     {
