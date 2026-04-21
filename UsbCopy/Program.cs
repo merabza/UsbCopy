@@ -1,13 +1,10 @@
-//Created by ProgramClassCreator at 6/28/2021 12:52:58
-
 using System;
 using System.Runtime.CompilerServices;
 using AppCliTools.CliParameters;
+using AppCliTools.CliTools;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ParametersManagement.LibParameters;
 using Serilog;
-using Serilog.Events;
 using SystemTools.SystemToolsShared;
 using UsbCopy;
 using UsbCopy.Models;
@@ -39,17 +36,13 @@ try
     await using ServiceProvider serviceProvider = serviceCollection
         .AddServices(appName, argParser.Par!, argParser.ParametersFileName!).BuildServiceProvider();
 
-
-
-    var cliLoopPar = CliAppLoopParameters<Program>.Create(serviceProvider);
+    (CliAppLoopParameters? cliLoopPar, logger) = CliAppLoopParameters.Create<Program>(serviceProvider);
     if (cliLoopPar is null)
     {
         return 3;
     }
 
-    logger = cliLoopPar.Logger;
-
-    var cliAppLoop = new CliAppLoop<Program>(cliLoopPar);
+    var cliAppLoop = new CliAppLoop(cliLoopPar);
 
     return await cliAppLoop.Run() ? 0 : 100;
 }
