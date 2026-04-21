@@ -18,56 +18,45 @@ try
     Console.WriteLine("Loading...");
 
     const string appName = "UsbCopy";
-    const string appKey = "DFD53CBF-F62F-4795-80DA-F4AD7ECC4AD3";
 
-    //პროგრამის ატრიბუტების დაყენება 
-    ProgramAttributes.Instance.AppName = appName;
-    ProgramAttributes.Instance.AppKey = appKey;
+    var argParser = new ArgumentsParser<UsbCopyParameters>(args, appName);
 
-    string key = appKey + Environment.MachineName.Capitalize();
-
-    var argParser = new ArgumentsParser<UsbCopyParameters>(args, "UsbCopy", key);
     switch (argParser.Analysis())
     {
-        case EParseResult.Ok: break;
-        case EParseResult.Usage: return 1;
-        case EParseResult.Error: return 2;
-        default: throw new SwitchExpressionException();
+        case EParseResult.Ok:
+            break;
+        case EParseResult.Usage:
+            return 1;
+        case EParseResult.Error:
+            return 2;
+        default:
+            throw new SwitchExpressionException();
     }
 
-    var par = (UsbCopyParameters?)argParser.Par;
-    if (par is null)
-    {
-        StShared.WriteErrorLine("ApAgentParameters is null", true);
-        return 3;
-    }
+    var serviceCollection = new ServiceCollection();
 
-    string? parametersFileName = argParser.ParametersFileName;
-    var servicesCreator = new ServicesCreator(par.LogFolder, null, "UsbCopy");
     // ReSharper disable once using
-    await using ServiceProvider? serviceProvider = servicesCreator.CreateServiceProvider(LogEventLevel.Information);
+    await using ServiceProvider serviceProvider = serviceCollection
+        .AddServices(appName, argParser.Par!, argParser.ParametersFileName!).BuildServiceProvider();
 
-    if (serviceProvider == null)
-    {
-        Console.WriteLine("Logger does not created");
-        return 8;
-    }
 
-    logger = serviceProvider.GetService<ILogger<Program>>();
-    if (logger is null)
+
+    var cliLoopPar = CliAppLoopParameters<Program>.Create(serviceProvider);
+    if (cliLoopPar is null)
     {
-        StShared.WriteErrorLine("logger is null", true);
         return 3;
     }
 
-    var usbCopy = new UsbCopyCliAppLoop(logger, new ParametersManager(parametersFileName, par));
+    logger = cliLoopPar.Logger;
 
-    return await usbCopy.Run() ? 0 : 1;
+    var cliAppLoop = new CliAppLoop<Program>(cliLoopPar);
+
+    return await cliAppLoop.Run() ? 0 : 100;
 }
 catch (Exception e)
 {
     StShared.WriteException(e, true, logger);
-    return 7;
+    return 4;
 }
 finally
 {
