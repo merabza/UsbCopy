@@ -14,7 +14,7 @@ namespace UsbCopy;
 public sealed class UsbCopyParametersEditor : ParametersEditor
 {
     public UsbCopyParametersEditor(IParameters parameters, ParametersManager parametersManager, ILogger logger) : base(
-        "UsbCopy Parameters Editor", parameters, parametersManager)
+        MenuCommandName, parameters, parametersManager)
     {
         FieldEditors.Add(new FolderPathFieldEditor(nameof(UsbCopyParameters.LogFolder)));
         //FieldEditors.Add(new FileStoragesFieldEditor(logger, nameof(UsbCopyParameters.FileStorages),
@@ -28,4 +28,7 @@ public sealed class UsbCopyParametersEditor : ParametersEditor
         FieldEditors.Add(new DictionaryFieldEditor<ExcludeSetCruder, ExcludeSet>(nameof(UsbCopyParameters.ExcludeSets),
             logger, parametersManager));
     }
+
+    public static string MenuCommandName => "UsbCopy Parameters Editor";
+
 }

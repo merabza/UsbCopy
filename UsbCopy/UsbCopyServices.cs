@@ -1,13 +1,10 @@
 ﻿using System;
-using AppCliTools.CliMenu;
-using AppCliTools.CliMenu.DependencyInjection;
 using AppCliTools.CliTools.DependencyInjection;
 using AppCliTools.CliTools.Models;
 using AppCliTools.CliTools.Services.MenuBuilder;
 using Microsoft.Extensions.DependencyInjection;
 using ParametersManagement.LibParameters;
 using Serilog.Events;
-using SystemTools.BackgroundTasks;
 using SystemTools.SystemToolsShared;
 using UsbCopy.Models;
 
@@ -27,7 +24,7 @@ public static class UsbCopyServices
             //.AddTransientAllStrategies<IMenuCommandListFactoryStrategy>(
             //    typeof(ProjectGroupsListFactoryStrategy).Assembly)
             //.AddSingleton<IProcesses, Processes>()
-            //.AddSingleton<IMenuBuilder, SupportToolsMenuBuilder>()
+            .AddSingleton<IMenuBuilder, UsbCopyMenuBuilder>()
             //.AddTransientAllStrategies<IMenuCommandFactoryStrategy>(
             //    typeof(SupportToolsParametersEditorListCliMenuCommandFactoryStrategy).Assembly)
             //.AddTransientAllStrategies<IToolCommandFactoryStrategy>(
@@ -40,11 +37,11 @@ public static class UsbCopyServices
             {
                 x.AppName = appName;
             })
-            //.AddMainParametersManager(x =>
-            //{
-            //    x.ParametersFileName = parametersFileName;
-            //    x.Par = par;
-            //})
+            .AddMainParametersManager(x =>
+            {
+                x.ParametersFileName = parametersFileName;
+                x.Par = par;
+            })
             ;
 
         // @formatter:on
@@ -68,4 +65,11 @@ public static class UsbCopyServices
         return services;
     }
 
+    private static IServiceCollection AddMainParametersManager(this IServiceCollection services,
+        Action<MainParametersManagerOptions> setupAction)
+    {
+        services.AddSingleton<IParametersManager, ParametersManager>();
+        services.Configure(setupAction);
+        return services;
+    }
 }
