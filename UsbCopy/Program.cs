@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using SystemTools.SystemToolsShared;
-using UsbCopy;
+using UsbCopy.DependencyInjection;
 using UsbCopy.Models;
 
 ILogger<Program>? logger = null;

@@ -1,18 +1,15 @@
-﻿using System;
-using AppCliTools.CliMenu;
+﻿using AppCliTools.CliMenu;
 using AppCliTools.CliMenu.DependencyInjection;
-using AppCliTools.CliTools.App;
 using AppCliTools.CliTools.DependencyInjection;
 using AppCliTools.CliTools.Services.MenuBuilder;
 using Microsoft.Extensions.DependencyInjection;
-using ParametersManagement.LibParameters;
+using ParametersManagement.LibParameters.DependencyInjection;
 using Serilog.Events;
-using SystemTools.SystemToolsShared;
 using UsbCopy.Menu.ProjectsList;
 using UsbCopy.Menu.UsbCopyParametersEdit;
 using UsbCopy.Models;
 
-namespace UsbCopy;
+namespace UsbCopy.DependencyInjection;
 
 public static class UsbCopyServices
 {
@@ -40,23 +37,6 @@ public static class UsbCopyServices
 
         // @formatter:on
 
-        return services;
-    }
-
-    private static IServiceCollection AddApplication(this IServiceCollection services,
-        Action<ApplicationOptions> setupAction)
-    {
-        services.AddSingleton<IApplication, Application>();
-        services.Configure(setupAction);
-        return services;
-    }
-
-    // ReSharper disable once UnusedMethodReturnValue.Local
-    private static IServiceCollection AddMainParametersManager(this IServiceCollection services,
-        Action<MainParametersManagerOptions> setupAction)
-    {
-        services.AddSingleton<IParametersManager, ParametersManager>();
-        services.Configure(setupAction);
         return services;
     }
 }
