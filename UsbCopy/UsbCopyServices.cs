@@ -1,8 +1,8 @@
 ﻿using System;
 using AppCliTools.CliMenu;
 using AppCliTools.CliMenu.DependencyInjection;
+using AppCliTools.CliTools.App;
 using AppCliTools.CliTools.DependencyInjection;
-using AppCliTools.CliTools.Models;
 using AppCliTools.CliTools.Services.MenuBuilder;
 using Microsoft.Extensions.DependencyInjection;
 using ParametersManagement.LibParameters;
@@ -22,21 +22,11 @@ public static class UsbCopyServices
         // @formatter:off
         services
             .AddSerilogLoggerService(LogEventLevel.Information, appName, par.LogFolder)
-            //.AddHttpClient()
-            //.AddMemoryCache()
-            //.AddSingleton<MenuParameters>()
             .AddTransientAllStrategies<IMenuCommandListFactoryStrategy>(
                 typeof(ProjectsListFactoryStrategy).Assembly)
-            //.AddSingleton<IProcesses, Processes>()
             .AddSingleton<IMenuBuilder, UsbCopyMenuBuilder>()
             .AddTransientAllStrategies<IMenuCommandFactoryStrategy>(
                 typeof(UsbCopyParametersEditorListCliMenuCommandFactoryStrategy).Assembly)
-            //.AddTransientAllStrategies<IToolCommandFactoryStrategy>(
-            //    typeof(CorrectNewDatabaseToolCommandFactoryStrategy).Assembly,
-            //    typeof(JetBrainsCleanupCodeRunnerToolCommandFactoryStrategy).Assembly,
-            //    typeof(JsonFromProjectDbProjectGetterFactoryStrategy).Assembly,
-            //    typeof(GenerateApiRoutesToolCommandFactoryStrategy).Assembly,
-            //    typeof(ApplicationSettingsEncoderToolCommandFactoryStrategy).Assembly)
             .AddApplication(x =>
             {
                 x.AppName = appName;
@@ -56,11 +46,12 @@ public static class UsbCopyServices
     private static IServiceCollection AddApplication(this IServiceCollection services,
         Action<ApplicationOptions> setupAction)
     {
-        services.AddSingleton<IApplication, UsbCopyApplication>();
+        services.AddSingleton<IApplication, Application>();
         services.Configure(setupAction);
         return services;
     }
 
+    // ReSharper disable once UnusedMethodReturnValue.Local
     private static IServiceCollection AddMainParametersManager(this IServiceCollection services,
         Action<MainParametersManagerOptions> setupAction)
     {
