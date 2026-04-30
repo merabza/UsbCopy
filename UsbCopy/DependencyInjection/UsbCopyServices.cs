@@ -5,6 +5,7 @@ using AppCliTools.CliTools.Services.MenuBuilder;
 using Microsoft.Extensions.DependencyInjection;
 using ParametersManagement.LibParameters.DependencyInjection;
 using Serilog.Events;
+using SystemTools.SystemToolsShared.DependencyInjection;
 using UsbCopy.Menu.ProjectsList;
 using UsbCopy.Menu.UsbCopyParametersEdit;
 using UsbCopy.Models;
