@@ -12,15 +12,12 @@ public class ProjectsListFactoryStrategy : IMenuCommandListFactoryStrategy
     private readonly ILogger<ProjectsListFactoryStrategy> _logger;
     private readonly IParametersManager _parametersManager;
 
-    // ReSharper disable once ConvertToPrimaryConstructor
     public ProjectsListFactoryStrategy(IParametersManager parametersManager,
         ILogger<ProjectsListFactoryStrategy> logger)
     {
         _parametersManager = parametersManager;
         _logger = logger;
     }
-
-    public string StrategyName => nameof(ProjectsListFactoryStrategy);
 
     public List<CliMenuCommand> CreateMenuCommandsList()
     {

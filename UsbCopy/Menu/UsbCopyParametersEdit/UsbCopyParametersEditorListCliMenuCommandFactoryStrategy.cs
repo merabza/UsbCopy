@@ -12,15 +12,12 @@ public class UsbCopyParametersEditorListCliMenuCommandFactoryStrategy : IMenuCom
     private readonly ILogger<UsbCopyParametersEditorListCliMenuCommandFactoryStrategy> _logger;
     private readonly IParametersManager _parametersManager;
 
-    // ReSharper disable once ConvertToPrimaryConstructor
     public UsbCopyParametersEditorListCliMenuCommandFactoryStrategy(
         ILogger<UsbCopyParametersEditorListCliMenuCommandFactoryStrategy> logger, IParametersManager parametersManager)
     {
         _logger = logger;
         _parametersManager = parametersManager;
     }
-
-    public string StrategyName => nameof(UsbCopyParametersEditorListCliMenuCommandFactoryStrategy);
 
     public CliMenuCommand CreateMenuCommand()
     {
