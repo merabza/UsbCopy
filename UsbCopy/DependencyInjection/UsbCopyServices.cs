@@ -1,10 +1,10 @@
 ﻿using AppCliTools.CliMenu;
-using AppCliTools.CliMenu.DependencyInjection;
-using AppCliTools.CliTools.DependencyInjection;
 using AppCliTools.CliTools.Services.MenuBuilder;
 using Microsoft.Extensions.DependencyInjection;
+using ParametersManagement.LibParameters;
 using ParametersManagement.LibParameters.DependencyInjection;
 using Serilog.Events;
+using SystemTools.SerilogStuff.DependencyInjection;
 using SystemTools.SystemToolsShared.DependencyInjection;
 using UsbCopy.Menu.ProjectsList;
 using UsbCopy.Menu.UsbCopyParametersEdit;
@@ -29,7 +29,7 @@ public static class UsbCopyServices
             {
                 x.AppName = appName;
             })
-            .AddMainParametersManager(x =>
+            .AddMainParametersManager<ParametersManager>(x =>
             {
                 x.ParametersFileName = parametersFileName;
                 x.Par = par;
