@@ -15,10 +15,11 @@ public sealed class UsbCopyParametersEditor : ParametersEditor
         "UsbCopy Parameters Editor", parameters, parametersManager)
     {
         FieldEditors.Add(new FolderPathFieldEditor(nameof(UsbCopyParameters.LogFolder)));
-        FieldEditors.Add(
-            new DictionaryFieldEditor<FileStorageCruder, FileStorageData>(nameof(UsbCopyParameters.FileStorages),
-                logger, parametersManager));
+
+        FieldEditors.Add(new DictionaryFieldEditor<FileStorageCruder, FileStorageData>(
+            nameof(UsbCopyParameters.FileStorages), x => new FileStorageCruder(logger, parametersManager, x)));
+
         FieldEditors.Add(new DictionaryFieldEditor<ExcludeSetCruder, ExcludeSet>(nameof(UsbCopyParameters.ExcludeSets),
-            logger, parametersManager));
+            x => new ExcludeSetCruder(parametersManager, x)));
     }
 }
