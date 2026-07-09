@@ -1,17 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliMenu\AppCliTools.CliMenu.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliParametersEdit\AppCliTools.CliParametersEdit.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliParametersExcludeSetsEdit\AppCliTools.CliParametersExcludeSetsEdit.csproj" />
-    <ProjectReference Include="..\..\AppCliTools\AppCliTools.CliParameters\AppCliTools.CliParameters.csproj" />
-    <ProjectReference Include="..\..\ParametersManagement\ParametersManagement.LibFileParameters\ParametersManagement.LibFileParameters.csproj" />
-    <ProjectReference Include="..\..\ParametersManagement\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
-    <ProjectReference Include="..\..\ToolsManagement\ToolsManagement.FileManagersMain\ToolsManagement.FileManagersMain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AppCliTools.CliMenu" />
+    <PackageReference Include="AppCliTools.CliParameters" />
+    <PackageReference Include="AppCliTools.CliParametersEdit" />
+    <PackageReference Include="AppCliTools.CliParametersExcludeSetsEdit" />
+    <PackageReference Include="ParametersManagement.LibFileParameters" />
+    <PackageReference Include="ParametersManagement.LibParameters" />
     <PackageReference Include="SystemTools.SerilogStuff" />
+    <PackageReference Include="ToolsManagement.FileManagersMain" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,9 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="AppCliTools.CliMenu" Version="1.0.9686.36108" />
+    <PackageVersion Include="AppCliTools.CliParameters" Version="1.0.9686.36108" />
+    <PackageVersion Include="AppCliTools.CliParametersEdit" Version="1.0.9686.36108" />
+    <PackageVersion Include="AppCliTools.CliParametersExcludeSetsEdit" Version="1.0.9686.36108" />
+    <PackageVersion Include="ParametersManagement.LibFileParameters" Version="1.0.9686.34062" />
+    <PackageVersion Include="ParametersManagement.LibParameters" Version="1.0.9686.34062" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.27.0.140913" />
-    <PackageVersion Include="SystemTools.SerilogStuff" Version="1.0.9686.26889" />
+    <PackageVersion Include="SystemTools.SerilogStuff" Version="1.0.9686.33588" />
+    <PackageVersion Include="ToolsManagement.FileManagersMain" Version="1.0.9686.35962" />
   </ItemGroup>
 </Project>
