@@ -11,7 +11,7 @@
     <PackageVersion Include="ParametersManagement.LibFileParameters" Version="1.0.9686.34062" />
     <PackageVersion Include="ParametersManagement.LibParameters" Version="1.0.9686.34062" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.27.0.140913" />
-    <PackageVersion Include="SystemTools.SerilogStuff" Version="1.0.9686.33588" />
+    <PackageVersion Include="SystemTools.SerilogStuff" Version="1.0.9689.2043" />
     <PackageVersion Include="ToolsManagement.FileManagersMain" Version="1.0.9686.35962" />
   </ItemGroup>
 </Project>
