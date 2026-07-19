@@ -4,14 +4,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AppCliTools.CliMenu" Version="1.0.9686.36108" />
-    <PackageVersion Include="AppCliTools.CliParameters" Version="1.0.9686.36108" />
-    <PackageVersion Include="AppCliTools.CliParametersEdit" Version="1.0.9686.36108" />
-    <PackageVersion Include="AppCliTools.CliParametersExcludeSetsEdit" Version="1.0.9686.36108" />
-    <PackageVersion Include="ParametersManagement.LibFileParameters" Version="1.0.9686.36920" />
-    <PackageVersion Include="ParametersManagement.LibParameters" Version="1.0.9686.36920" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.29.0.143774" />
-    <PackageVersion Include="SystemTools.SerilogStuff" Version="1.0.9691.25951" />
-    <PackageVersion Include="ToolsManagement.FileManagersMain" Version="1.0.9686.36920" />
   </ItemGroup>
 </Project>
