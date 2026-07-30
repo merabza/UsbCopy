@@ -149,8 +149,11 @@ public sealed class UsbCopyRunnerParameters : IParameters
 
             if (excludeSet.FolderFileMasks is { Count: > 0 })
             {
-                excludes = excludeSet.FolderFileMasks
-                    .Select(s => s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar)).ToArray();
+                excludes =
+                [
+                    .. excludeSet.FolderFileMasks.Select(s =>
+                        s.Replace(Path.DirectorySeparatorChar, fileManager.DirectorySeparatorChar))
+                ];
             }
         }
 

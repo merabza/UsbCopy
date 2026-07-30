@@ -68,8 +68,11 @@ public sealed class UsbCopyRunnerToolCommand : ToolCommand
             ProcessFolder(folderAfterRootFullName);
         }
 
-        List<string> files = fileManager.GetFileNames(afterRootPath, null)
-            .Where(file => !NeedExclude(fileManager.PathCombine(afterRootPath, file))).ToList();
+        List<string> files =
+        [
+            .. fileManager.GetFileNames(afterRootPath, null)
+                .Where(file => !NeedExclude(fileManager.PathCombine(afterRootPath, file)))
+        ];
 
         if (files.Count == 0)
         {

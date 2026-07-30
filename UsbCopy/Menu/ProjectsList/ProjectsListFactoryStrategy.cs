@@ -23,7 +23,10 @@ public class ProjectsListFactoryStrategy : IMenuCommandListFactoryStrategy
     {
         var parameters = (UsbCopyParameters)_parametersManager.Parameters;
         //პროექტების ჩამონათვალი
-        return parameters.Projects.OrderBy(o => o.Key).Select(kvp =>
-            new UsbCopyProjectSubMenuCommand(_logger, _parametersManager, kvp.Key)).Cast<CliMenuCommand>().ToList();
+        return
+        [
+            .. parameters.Projects.OrderBy(o => o.Key).Select(kvp =>
+                new UsbCopyProjectSubMenuCommand(_logger, _parametersManager, kvp.Key))
+        ];
     }
 }
