@@ -25,7 +25,7 @@ public static class UsbCopyServices
             .AddSingleton<IMenuBuilder, UsbCopyMenuBuilder>()
             .AddTransientAllStrategies<IMenuCommandFactoryStrategy>(
                 typeof(UsbCopyParametersEditorListCliMenuCommandFactoryStrategy).Assembly)
-            .AddApplication(x =>
+            .AddApp(x =>
             {
                 x.AppName = appName;
             })
